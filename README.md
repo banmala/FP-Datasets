@@ -5,4 +5,4 @@ This is a repo to generate datsets for FP generation Using GAN. Here, we are goi
 2. Then we create parcel using the augmented datasets.
 3. Then using the same augmented datasets, we create footprint of the floor.
 4. Then using the same augmented datasets, we create room split plan of the floor using the color representation of rooms.
-5. Then usinf same augmented datasets, we create well furnished dataset of the floor using the color representation of furniture.
+5. Then using same augmented datasets, we create well furnished dataset of the floor using the color representation of furniture.
