@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import os.path
 
-folder="Dataset_4rooms"
+folder="Dataset_5rooms"
 list_of_image=os.listdir("ROBIN/"+folder)
 # print(list_of_image)
 #to get the size of all images 
@@ -36,9 +36,9 @@ def rotate_image(image, angle):
 
 
 # load background image as grayscale
-new_folder="final_"+folder
+new_folder="augmented_"+folder
 if not os.path.isdir("ROBIN/"+new_folder):
-    os.mkdir("ROBIN/"+new_folder)
+    os.makedirs("ROBIN/"+new_folder)
 # os.mkdir(new_folder)
 max_size+=int(max_size/4)
 back = np.ones((max_size,max_size,1),np.uint8)*255
@@ -72,7 +72,7 @@ for index,image in enumerate(list_of_image):
     cv2.imwrite('ROBIN/'+new_folder+'/'+image, result)
 
     #For space expanded and then 30 degree rotated datsets:
-    # result=rotate_image(result,30)
-    # cv2.imwrite('ROBIN/'+new_folder+'/'+os.path.splitext(image)[0]+'_r.jpg', result)
+    result=rotate_image(result,30)
+    cv2.imwrite('ROBIN/'+new_folder+'/'+os.path.splitext(image)[0]+'_r.jpg', result)
 
     

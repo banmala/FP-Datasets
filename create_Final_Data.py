@@ -5,6 +5,7 @@ class  Parcel_Preparation:
     def __init__(self):
         self.folder_name = "Dataset_3rooms"
         self.parcel_folder_name = "final_"+self.folder_name
+        self.folder_name = "augmented_"+self.folder_name
         self.image_size = 512
         self.list_of_image = os.listdir("ROBIN/"+self.folder_name)
         cv2.namedWindow(winname="Thumbnail")
@@ -30,7 +31,7 @@ class  Parcel_Preparation:
             while True:
                 corners = np.array(self.parcel_points)
                 self.img = cv2.polylines(self.img, [corners],
-                           isClosed=False, color=(0,0,0), thickness=9)
+                           isClosed=False, color=(0,0,0), thickness=5)
                 cv2.imshow("Thumbnail",self.img)
                 
                 if cv2.waitKey(10) & 0xFF == 27:
