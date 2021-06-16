@@ -1,4 +1,4 @@
-import os 
+import os
 import cv2
 import numpy as np
 class  Parcel_Preparation:
@@ -21,22 +21,25 @@ class  Parcel_Preparation:
             self.parcel_points.append([x,y])
             print(event,x,y,flags,param)
 
-
     def start(self):
-        for image in self.list_of_image[:5]:
-            self.parcel_points = []
-            self.img = cv2.imread("ROBIN/"+self.folder_name+"/"+image)
-            self.img = cv2.resize(self.img,(self.image_size,self.image_size))
-            
-            while True:
-                corners = np.array(self.parcel_points)
-                self.img = cv2.polylines(self.img, [corners],
-                           isClosed=False, color=(0,0,0), thickness=5)
-                cv2.imshow("Thumbnail",self.img)
+        for image in self.list_of_image:
+            if not os.path.isfile('ROBIN/'+self.parcel_folder_name+'/'+image):
+                self.parcel_points = []
+                self.img = cv2.imread("ROBIN/"+self.folder_name+"/"+image)
+                self.img = cv2.resize(self.img,(self.image_size,self.image_size))
                 
-                if cv2.waitKey(10) & 0xFF == 27:
-                    break
-            cv2.imwrite("ROBIN/"+self.parcel_folder_name+"/"+image,self.img)
+                while True:
+                    corners = np.array(self.parcel_points)
+                    self.img = cv2.polylines(self.img, [corners],
+                            isClosed=False, color=(0,0,0), thickness=5)
+                    cv2.imshow("Thumbnail",self.img)
+                    
+                    if cv2.waitKey(10) & 0xFF == 27:
+                        break
+                if len(self.parcel_points) != 0:
+                    cv2.imwrite("ROBIN/"+self.parcel_folder_name+"/"+image,self.img)
+            else:
+                print("Image already finalized")
         cv2.destroyAllWindows()
 
 

@@ -25,23 +25,27 @@ class  Parcel_Preparation:
 
 
     def create_footprint(self):
-        for image in self.list_of_image[:5]:
-            self.footprint_points = []
-            self.img = cv2.imread("ROBIN/"+self.final_folder_name+"/"+image)
-            self.img = cv2.resize(self.img,(self.image_size,self.image_size))
-            
-            while True:
-                self.img_copy=np.copy(self.img)
-                if len(self.footprint_points)>2:
-                    corners = np.array(self.footprint_points)
-                    self.img_copy = cv2.fillPoly(self.img_copy, [corners], color=(255, 255, 255))
-                if self.img is self.img_copy:
-                    print("True")
-                cv2.imshow("Thumbnail",self.img_copy)
+        for image in self.list_of_image:
+            if not os.path.isfile('ROBIN/'+self.parcel_folder_name+'/'+image):
+                self.footprint_points = []
+                self.img = cv2.imread("ROBIN/"+self.final_folder_name+"/"+image)
+                self.img = cv2.resize(self.img,(self.image_size,self.image_size))
                 
-                if cv2.waitKey(10) & 0xFF == 27:
-                    break
-            cv2.imwrite("ROBIN/"+self.parcel_folder_name+"/"+image,self.img_copy)
+                while True:
+                    self.img_copy=np.copy(self.img)
+                    if len(self.footprint_points)>2:
+                        corners = np.array(self.footprint_points)
+                        self.img_copy = cv2.fillPoly(self.img_copy, [corners], color=(255, 255, 255))
+                    if self.img is self.img_copy:
+                        print("True")
+                    cv2.imshow("Thumbnail",self.img_copy)
+                    
+                    if cv2.waitKey(10) & 0xFF == 27:
+                        break
+                if len(self.footprint_points) != 0:
+                cv2.imwrite("ROBIN/"+self.parcel_folder_name+"/"+image,self.img_copy)
+            else:
+                print("Partion already created")
         cv2.destroyAllWindows()
 
 

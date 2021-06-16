@@ -31,30 +31,33 @@ class  Parcel_Preparation:
 
 
     def create_footprint(self):
-        for image in self.list_of_image[:5]:
-            self.footprint_points = []
-            self.footprint_points_clear = []
-            self.isClear = False
-            self.img = cv2.imread("ROBIN/"+self.final_folder_name+"/"+image)
-            self.img = cv2.resize(self.img,(self.image_size,self.image_size))
-            
-            while True:
-                self.img_copy=np.copy(self.img)
-                if len(self.footprint_points)>2:
-                    corners = np.array(self.footprint_points)
-                    self.img_copy = cv2.fillPoly(self.img_copy, [corners], color=(0, 0, 0))
-                if len(self.footprint_points_clear)>2 and self.isClear:
-                    corners = np.array(self.footprint_points_clear)
-                    self.img_copy = cv2.fillPoly(self.img_copy, [corners], color=(255, 255, 255))
-                cv2.imshow("Thumbnail",self.img_copy)
+        for image in self.list_of_image:
+            if not os.path.isfile('ROBIN/'+self.footprint_folder_name+'/'+image):
+                self.footprint_points = []
+                self.footprint_points_clear = []
+                self.isClear = False
+                self.img = cv2.imread("ROBIN/"+self.final_folder_name+"/"+image)
+                self.img = cv2.resize(self.img,(self.image_size,self.image_size))
                 
-                if cv2.waitKey(10) & 0xFF == 27:
-                    break
-                if cv2.waitKey(10) & 0xFF == ord('c'):
-                    self.isClear = True
-                    print(self.isClear)
-                
-            cv2.imwrite("ROBIN/"+self.footprint_folder_name+"/"+image,self.img_copy)
+                while True:
+                    self.img_copy=np.copy(self.img)
+                    if len(self.footprint_points)>2:
+                        corners = np.array(self.footprint_points)
+                        self.img_copy = cv2.fillPoly(self.img_copy, [corners], color=(0, 0, 0))
+                    if len(self.footprint_points_clear)>2 and self.isClear:
+                        corners = np.array(self.footprint_points_clear)
+                        self.img_copy = cv2.fillPoly(self.img_copy, [corners], color=(255, 255, 255))
+                    cv2.imshow("Thumbnail",self.img_copy)
+                    
+                    if cv2.waitKey(10) & 0xFF == 27:
+                        break
+                    if cv2.waitKey(10) & 0xFF == ord('c'):
+                        self.isClear = True
+                        print(self.isClear)
+                if len(self.footprint_points) != 0:  
+                    cv2.imwrite("ROBIN/"+self.footprint_folder_name+"/"+image,self.img_copy)
+            else:
+                print("Footprint already created.")
         cv2.destroyAllWindows()
 
 
