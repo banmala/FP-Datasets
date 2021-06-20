@@ -43,7 +43,7 @@ class  Parcel_Preparation:
                     if cv2.waitKey(10) & 0xFF == 27:
                         break
                 if len(self.footprint_points) != 0:
-                cv2.imwrite("ROBIN/"+self.parcel_folder_name+"/"+image,self.img_copy)
+                    cv2.imwrite("ROBIN/"+self.parcel_folder_name+"/"+image,self.img_copy)
             else:
                 print("Partion already created")
         cv2.destroyAllWindows()
