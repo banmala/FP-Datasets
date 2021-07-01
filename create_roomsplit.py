@@ -7,7 +7,7 @@ from PIL import ImageColor
 # c to clear the door image 
 class  Parcel_Preparation:
     def __init__(self):
-        self.folder_name = "Dataset_3rooms"
+        self.folder_name = "Dataset_4rooms"
         self.final_folder_name = "final_"+self.folder_name
         self.roomsplit_folder_name = 'roomsplit_'+self.folder_name
         self.image_size = 512

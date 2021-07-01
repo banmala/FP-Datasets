@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import os.path
 
-folder="Dataset_3rooms"
+folder="Dataset_4rooms"
 list_of_image=os.listdir("ROBIN/"+folder)
 # print(list_of_image)
 #to get the size of all images 

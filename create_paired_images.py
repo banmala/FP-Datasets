@@ -5,7 +5,7 @@ from copy import deepcopy, copy
 
 class  Paired_Preparation:
     def __init__(self):
-        self.folder_name = "Dataset_3rooms"
+        self.folder_name = "Dataset_4rooms"
         self.final_folder_name_first = "parcel_"+self.folder_name
         self.final_folder_name_second = "footprint_"+self.folder_name
         self.save_folder_name = 'footprint_generation'+self.folder_name

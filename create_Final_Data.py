@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 class  Parcel_Preparation:
     def __init__(self):
-        self.folder_name = "Dataset_3rooms"
+        self.folder_name = "Dataset_4rooms"
         self.parcel_folder_name = "final_"+self.folder_name
         self.folder_name = "augmented_"+self.folder_name
         self.image_size = 512
